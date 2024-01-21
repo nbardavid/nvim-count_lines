@@ -15,7 +15,11 @@ function M.count_lines()
         elseif line:match("^}$") and trigger == 1 then
             trigger = 0
             local nbr_lignes = i - ligne_debut - 1
-            vim.api.nvim_buf_set_virtual_text(buffer_id, -1, i - 1, {{ "//------" .. nbr_lignes .. " lignes------", "Comment" }}, {})
+			if nbr_lignes > 25 then
+				vim.api.nvim_buf_set_virtual_text(buffer_id, -1, i - 1, {{ "//------" .. nbr_lignes .. " lines /!\\ ------", "Comment" }}, {})
+			else
+				vim.api.nvim_buf_set_virtual_text(buffer_id, -1, i - 1, {{ "//------" .. nbr_lignes .. " lines------", "Comment" }}, {})
+			end
         end
     end
 end
