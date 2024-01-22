@@ -1,13 +1,24 @@
 local M = {}
+M.active = true
+
+function M.desactivate()
+	M.active=false
+end
+
+function M.activate()
+	M.active=false
+end
 
 function M.count_lines()
 
+	if M.active==false then
+		return
+	end
     local buffer_id = vim.api.nvim_get_current_buf()
     vim.api.nvim_buf_clear_namespace(buffer_id, -1, 0, -1)
     local lines = vim.api.nvim_buf_get_lines(buffer_id, 0, -1, false)
     local trigger = 0
     local ligne_debut = nil
-
     for i, line in ipairs(lines) do
         if line:match("^{$") then
             trigger = 1
@@ -24,6 +35,8 @@ function M.count_lines()
     end
 end
 
+vim.api.nvim_set_keymap('n', '<leader>cls', ':lua require("nom_du_module").activate()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>clh', ':lua require("nom_du_module").deactivate()<CR>', { noremap = true, silent = true })
 vim.api.nvim_create_autocmd({"BufEnter", "BufRead", "TextChanged", "TextChangedI", "BufWritePost"}, {
     pattern = "*",
     callback = M.count_lines
