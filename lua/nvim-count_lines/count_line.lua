@@ -6,7 +6,7 @@ function M.desactivate()
 end
 
 function M.activate()
-	M.active=false
+	M.active=true
 end
 
 function M.count_lines()
@@ -35,8 +35,8 @@ function M.count_lines()
     end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>cls', ':lua require("nom_du_module").activate()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>clh', ':lua require("nom_du_module").deactivate()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cls', ':lua require(count_lines).activate()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>clh', ':lua require(count_lines).deactivate()<CR>', { noremap = true, silent = true })
 vim.api.nvim_create_autocmd({"BufEnter", "BufRead", "TextChanged", "TextChangedI", "BufWritePost"}, {
     pattern = "*",
     callback = M.count_lines
