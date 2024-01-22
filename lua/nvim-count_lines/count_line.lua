@@ -1,7 +1,7 @@
 local M = {}
 M.active = true
 
-function M.desa()	
+function M.desa()
 	M.active=false
 end
 
