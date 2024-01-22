@@ -2,11 +2,14 @@ local M = {}
 M.active = true
 
 function M.desa()
-	M.active=false
+    M.active = false
+    local buffer_id = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_clear_namespace(buffer_id, -1, 0, -1)
 end
 
 function M.acti()
 	M.active=true
+	M.count_lines()
 end
 
 function M.count_lines()
@@ -43,3 +46,4 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufRead", "TextChanged", "TextChangedI
 })
 
 return M
+
