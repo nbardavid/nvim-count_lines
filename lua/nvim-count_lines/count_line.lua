@@ -36,7 +36,7 @@ function M.count_lines()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>cls', ':lua require(nvim-count_lines).activate()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>clh', ':lua require(nvim-count_lines).deactivate()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>clh', ':lua require(nvim-count_lines).desactivate()<CR>', { noremap = true, silent = true })
 vim.api.nvim_create_autocmd({"BufEnter", "BufRead", "TextChanged", "TextChangedI", "BufWritePost"}, {
     pattern = "*",
     callback = M.count_lines
